@@ -174,7 +174,7 @@ tests/
 
 1. **Red** - Write a failing test for the new functionality
 2. **Green** - Write the minimum code to make the test pass
-3. **Refactor** - Clean up the code while keeping tests green
+3. **Refactor** - Clean up the code while keeping tests green. Consider using the `code-simplifier` agent to assist with refactoring—it specializes in simplifying code without altering functionality.
 
 ### Guidelines
 
