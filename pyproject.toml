@@ -52,7 +52,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["deep_research_api", "deep_research_shared", "deep_research_evals"]
+known-first-party = ["deep_research_api", "deep_research_shared", "deep_research_evals", "shared_types"]
 
 [tool.black]
 target-version = ["py311"]
@@ -69,4 +69,4 @@ strict = true
 warn_return_any = true
 warn_unused_configs = true
 explicit_package_bases = true
-mypy_path = "apps/api/deep_research_api:packages/shared/python/deep_research_shared:evals"
+mypy_path = "apps/api/deep_research_api:packages/shared/python/shared_types:evals"

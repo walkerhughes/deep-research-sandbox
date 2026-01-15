@@ -235,3 +235,6 @@ evals/results/
 secrets/
 credentials.json
 service-account*.json
+
+# TypeScript shared package build
+packages/shared/typescript/dist/
