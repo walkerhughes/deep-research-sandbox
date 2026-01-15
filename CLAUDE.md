@@ -153,6 +153,39 @@ deep-research-sandbox/
 └── pyproject.toml           # Root workspace config
 ```
 
+## Testing
+
+This repository follows **Test-Driven Development (TDD)**. Write tests before implementing features.
+
+### Test Organization
+
+```
+tests/
+├── conftest.py              # Shared fixtures and test configuration
+├── unit/                    # Fast, isolated unit tests
+│   ├── conftest.py          # Unit-specific fixtures (optional)
+│   └── ...
+└── integration/             # Tests that involve external systems/dependencies
+    ├── conftest.py          # Integration-specific fixtures (optional)
+    └── ...
+```
+
+### TDD Workflow
+
+1. **Red** - Write a failing test for the new functionality
+2. **Green** - Write the minimum code to make the test pass
+3. **Refactor** - Clean up the code while keeping tests green
+
+### Guidelines
+
+- Place shared fixtures in the root `tests/conftest.py`
+- Unit tests should be fast and have no external dependencies
+- Integration tests may use databases, APIs, or other services
+- Run tests frequently during development: `pytest tests/`
+- Run only unit tests for quick feedback: `pytest tests/unit/`
+
+---
+
 ## Issue Tracking
 
 All work is tracked via GitHub Issues.
