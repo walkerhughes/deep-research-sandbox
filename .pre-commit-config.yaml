@@ -1,0 +1,84 @@
+# Pre-commit hooks configuration
+# Install with: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # General hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ["--maxkb=1000"]
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  # Python - Ruff (linting + formatting)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # Python - Black (alternative formatter, runs after ruff)
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        language_version: python3.11
+
+  # Python - Type checking
+  # Note: mypy is disabled in pre-commit due to monorepo module resolution issues
+  # Run manually with: uv run mypy apps/api packages/shared/python evals
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.13.0
+  #   hooks:
+  #     - id: mypy
+  #       additional_dependencies:
+  #         - pydantic>=2.10.0
+  #         - types-requests
+  #       args: [--ignore-missing-imports, --explicit-package-bases]
+
+  # JavaScript/TypeScript - Prettier
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        types_or: [javascript, jsx, ts, tsx, json, yaml, markdown, css, scss]
+        exclude: |
+          (?x)^(
+            .*\.min\.js|
+            .*\.min\.css|
+            package-lock\.json|
+            pnpm-lock\.yaml|
+            yarn\.lock
+          )$
+
+  # JavaScript/TypeScript - ESLint (if using)
+  # Uncomment when ESLint is configured in the frontend
+  # - repo: https://github.com/pre-commit/mirrors-eslint
+  #   rev: v9.17.0
+  #   hooks:
+  #     - id: eslint
+  #       files: \.(js|jsx|ts|tsx)$
+  #       types: [file]
+  #       additional_dependencies:
+  #         - eslint
+  #         - typescript
+  #         - '@typescript-eslint/parser'
+  #         - '@typescript-eslint/eslint-plugin'
+
+# CI configuration
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit hooks
+  autofix_prs: true
+  autoupdate_branch: ""
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
