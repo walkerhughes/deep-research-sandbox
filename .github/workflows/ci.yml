@@ -32,7 +32,8 @@ jobs:
       - name: Run unit tests with coverage
         run: |
           uv run pytest tests/unit/ \
-            --cov=. \
+            --cov=apps/api/deep_research_api \
+            --cov=packages/shared/python/shared_types \
             --cov-report=xml \
             --cov-report=term-missing \
             -v
@@ -66,7 +67,8 @@ jobs:
       - name: Run integration tests
         run: |
           uv run pytest tests/integration/ \
-            --cov=. \
+            --cov=apps/api/deep_research_api \
+            --cov=packages/shared/python/shared_types \
             --cov-report=xml \
             --cov-report=term-missing \
             -v
